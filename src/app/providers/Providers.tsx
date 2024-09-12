@@ -17,7 +17,7 @@ const Providers: FC<ProvidersType> = ({ children }) => {
         setIsAuth,
       }}
     >
-      <Provider store={createStore()}>{children}</Provider>;
+      <Provider store={createStore()}>{children}</Provider>
     </AuthContext.Provider>
   );
 };

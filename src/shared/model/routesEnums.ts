@@ -1,5 +1,5 @@
 export const enum privateRoutesEnum {
-  login = "/login",
+  login = "/",
 }
 
 export const enum publicRoutesEnum {

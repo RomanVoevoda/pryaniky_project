@@ -1,10 +1,10 @@
 import { privateRoutesEnum, publicRoutesEnum } from "@/shared/model";
 import { FC, useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "../layout/Layout";
 import { privateRoutes } from "./consts/privateRoutes";
 import { publicRoutes } from "./consts/publicRoutes";
 import { AuthContext } from "@/features";
+import Layout from "../layout/Layout";
 
 const AppRouter: FC = () => {
   const context = useContext(AuthContext);
@@ -14,24 +14,30 @@ const AppRouter: FC = () => {
 
   const { isAuth } = context;
 
-  return isAuth ? (
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path={publicRoutesEnum.home} element={<Layout />}>
-          {publicRoutes.map((route) => (
-            <Route path={route.path} element={route.element} key={route.path} />
-          ))}
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  ) : (
-    <BrowserRouter>
-      <Routes>
-        <Route path={privateRoutesEnum.login} element={<Layout />}>
-          {privateRoutes.map((route) => (
-            <Route path={route.path} element={route.element} key={route.path} />
-          ))}
-        </Route>
+        {isAuth ? (
+          <Route path={publicRoutesEnum.home} element={<Layout />}>
+            {publicRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={route.element}
+                key={route.path}
+              />
+            ))}
+          </Route>
+        ) : (
+          <Route path={privateRoutesEnum.login} element={<Layout />}>
+            {privateRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={route.element}
+                key={route.path}
+              />
+            ))}
+          </Route>
+        )}
       </Routes>
     </BrowserRouter>
   );
