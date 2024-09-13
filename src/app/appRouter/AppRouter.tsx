@@ -1,5 +1,5 @@
 import { privateRoutesEnum, publicRoutesEnum } from "@/shared/model";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { privateRoutes } from "./consts/privateRoutes";
 import { publicRoutes } from "./consts/publicRoutes";
@@ -11,29 +11,27 @@ const AppRouter: FC = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {isAuth ? (
+      <Suspense>
+        <Routes>
           <Route path={publicRoutesEnum.home} element={<Layout />}>
-            {publicRoutes.map((route) => (
-              <Route
-                path={route.path}
-                element={route.element}
-                key={route.path}
-              />
-            ))}
+            {isAuth
+              ? publicRoutes.map((route) => (
+                  <Route
+                    path={route.path}
+                    element={route.element}
+                    key={route.path}
+                  />
+                ))
+              : privateRoutes.map((route) => (
+                  <Route
+                    path={route.path}
+                    element={route.element}
+                    key={route.path}
+                  />
+                ))}
           </Route>
-        ) : (
-          <Route path={privateRoutesEnum.login} element={<Layout />}>
-            {privateRoutes.map((route) => (
-              <Route
-                path={route.path}
-                element={route.element}
-                key={route.path}
-              />
-            ))}
-          </Route>
-        )}
-      </Routes>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
