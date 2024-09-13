@@ -1,25 +1,13 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "../store";
-import { AuthContext } from "@/features";
 
 interface ProvidersType {
   children: ReactNode;
 }
 
 const Providers: FC<ProvidersType> = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(false);
-
-  return (
-    <AuthContext.Provider
-      value={{
-        isAuth,
-        setIsAuth,
-      }}
-    >
-      <Provider store={createStore()}>{children}</Provider>
-    </AuthContext.Provider>
-  );
+  return <Provider store={createStore()}>{children}</Provider>;
 };
 
 export default Providers;

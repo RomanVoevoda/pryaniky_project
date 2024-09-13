@@ -1,18 +1,13 @@
 import { privateRoutesEnum, publicRoutesEnum } from "@/shared/model";
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { privateRoutes } from "./consts/privateRoutes";
 import { publicRoutes } from "./consts/publicRoutes";
-import { AuthContext } from "@/features";
 import Layout from "../layout/Layout";
+import { useAppSelector } from "@/shared/utils";
 
 const AppRouter: FC = () => {
-  const context = useContext(AuthContext);
-
-  if (!context)
-    throw new Error("Вы забыли добавить контекст для авторизации в провайдер!");
-
-  const { isAuth } = context;
+  const { isAuth } = useAppSelector((state) => state.auth);
 
   return (
     <BrowserRouter>
