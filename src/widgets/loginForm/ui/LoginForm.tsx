@@ -1,61 +1,152 @@
 import { login } from "@/features";
 import { publicRoutesEnum } from "@/shared/model";
-import { useAppDispatch } from "@/shared/utils";
-import { Button, Input, InputLabel } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/shared/utils";
+import { Box, Button, TextField } from "@mui/material";
+import { ChangeEvent, FC, startTransition, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./LoginForm.module.scss";
 
 const LoginForm: FC = () => {
-  const [userLogin, setUserLogin] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
   const dispatch = useAppDispatch();
 
+  const { isLoading, error } = useAppSelector((state) => state.auth);
+
+  const [loginInput, setLoginInput] = useState({
+    login: "",
+    error: false,
+    errorMessage: "",
+  });
+
+  const [passwordInput, setPasswordInput] = useState({
+    password: "",
+    error: false,
+    errorMessage: "",
+  });
+
   const handleLoginChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserLogin(e.target.value);
+    switch (e.target.value.length) {
+      case 0:
+        setLoginInput((prev) => ({
+          ...prev,
+          login: e.target.value,
+          errorMessage: "Введите логин",
+          error: true,
+        }));
+        break;
+      default:
+        setLoginInput((prev) => ({
+          ...prev,
+          login: e.target.value,
+          errorMessage: "",
+          error: false,
+        }));
+    }
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    switch (e.target.value.length) {
+      case 0:
+        setPasswordInput((prev) => ({
+          ...prev,
+          password: e.target.value,
+          errorMessage: "Введите пароль",
+          error: true,
+        }));
+        break;
+      default:
+        setPasswordInput((prev) => ({
+          ...prev,
+          password: e.target.value,
+          errorMessage: "",
+          error: false,
+        }));
+    }
   };
 
   const handleLogin = async () => {
+    setLoginInput((prev) => ({
+      ...prev,
+      error: false,
+      errorMessage: "",
+    }));
+    setPasswordInput((prev) => ({
+      ...prev,
+      error: false,
+      errorMessage: "",
+    }));
+
     try {
-      await dispatch(login({ login: userLogin, password }));
+      await dispatch(
+        login({ login: loginInput.login, password: passwordInput.password }),
+      );
+
+      //Не перемещать навигацию
       const navigate = useNavigate();
       navigate(publicRoutesEnum.home);
-    } catch(e) {
-      if(e instanceof Error)
-        throw new Error(e.message);
+    } catch (e) {
+      setLoginInput((prev) => ({ ...prev, errorMessage: "", error: true }));
+      setPasswordInput((prev) => ({
+        ...prev,
+        errorMessage: "Неправильный логин или пароль",
+        error: true,
+      }));
     }
   };
 
   return (
-    <form>
-      <InputLabel>Логин</InputLabel>
-      <Input
-        required
+    <Box
+      component="form"
+      sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+      noValidate={false}
+      autoComplete="off"
+      className={styles.form}
+    >
+      <h1>Войдите в аккаунт</h1>
+      <TextField
+        error={loginInput.error}
+        id="outlined-login-input"
+        label="Логин"
         type="text"
-        autoComplete="username"
-        value={userLogin}
+        autoComplete="current-username"
+        variant="standard"
+        helperText={loginInput.errorMessage}
+        value={loginInput.login}
         onChange={handleLoginChange}
-        placeholder="Логин"
+        className={styles.form__field}
+        fullWidth
+        margin="normal"
+        disabled={isLoading}
       />
 
-      <InputLabel>Пароль</InputLabel>
-      <Input
-        required
+      <TextField
+        error={passwordInput.error}
+        id="outlined-password-input"
+        label="Пароль"
         type="password"
         autoComplete="current-password"
-        value={password}
+        variant="standard"
+        helperText={passwordInput.errorMessage}
+        value={passwordInput.password}
         onChange={handlePasswordChange}
-        placeholder="Пароль"
+        className={styles.form__field}
+        fullWidth
+        margin="normal"
+        disabled={isLoading}
       />
 
-      <Button variant="contained" onClick={handleLogin}>
+      <Button
+        variant="contained"
+        onClick={handleLogin}
+        className={styles.form__button}
+        disabled={
+          isLoading ||
+          passwordInput.password.length < 1 ||
+          loginInput.login.length < 1
+        }
+      >
         Войти
       </Button>
-    </form>
+    </Box>
   );
 };
 

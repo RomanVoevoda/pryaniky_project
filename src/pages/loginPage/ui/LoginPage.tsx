@@ -1,13 +1,11 @@
 import { LoginForm } from "@/widgets";
-import { Modal } from "@mui/material";
-import React, { FC } from "react";
+import { FC } from "react";
+import styles from "./LoginPage.module.scss";
 
 const LoginPage: FC = () => {
   return (
-    <main>
-      <Modal open>
-        <LoginForm />
-      </Modal>
+    <main className={styles.page}>
+      <LoginForm />
     </main>
   );
 };
