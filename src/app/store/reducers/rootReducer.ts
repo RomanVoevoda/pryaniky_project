@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import authSliceReducer from "./authSlice/authSlice";
-import doxsSliceReducer from "./docsSlice/docsSlice";
+import docsSliceReducer from "./docsSlice/docsSlice";
+import { docsModalSlice } from "@/widgets";
 
 export const rootReducer = combineReducers({
   auth: authSliceReducer,
-  docs: doxsSliceReducer,
+  docs: docsSliceReducer,
+  modal: docsModalSlice,
 });
