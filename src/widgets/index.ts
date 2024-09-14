@@ -1,2 +1,2 @@
 export { LoginForm } from "./user";
-export { DocsTable } from "./document";
+export { DocsTable, DocsModal, docsModalSlice } from "./document";

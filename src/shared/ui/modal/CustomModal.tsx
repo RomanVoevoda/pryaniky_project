@@ -7,7 +7,11 @@ interface ModalProps {
   children: ReactElement;
 }
 const CustomModal: FC<ModalProps> = ({ open, children }) => {
-  return <Modal open={open} className={styles.modal}>{children}</Modal>;
+  return (
+    <Modal open={open} className={styles.modal}>
+      {children}
+    </Modal>
+  );
 };
 
 export default CustomModal;
