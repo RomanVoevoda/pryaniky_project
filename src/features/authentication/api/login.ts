@@ -1,4 +1,4 @@
-import AuthService from "@/shared/api/service/AuthService";
+import { AuthService } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 interface LoginParams {
