@@ -1,7 +1,7 @@
 export interface AuthResponseTypes {
-  data: Data;
+  data: AuthData;
 }
 
-interface Data {
+interface AuthData {
   token: string;
 }

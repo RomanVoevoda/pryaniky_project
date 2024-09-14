@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import client from "../client";
+import client from "../../client";
 import { AuthResponseTypes } from "./types";
 
 export default class AuthService {
