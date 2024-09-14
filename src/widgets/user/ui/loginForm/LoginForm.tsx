@@ -2,7 +2,7 @@ import { login } from "@/features";
 import { publicRoutesEnum } from "@/shared/model";
 import { useAppDispatch, useAppSelector } from "@/shared/utils";
 import { Box, Button, TextField } from "@mui/material";
-import { ChangeEvent, FC, startTransition, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LoginForm.module.scss";
 

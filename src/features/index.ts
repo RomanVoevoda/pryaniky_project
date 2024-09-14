@@ -1,2 +1,2 @@
-export { login } from "./authentication";
+export { login } from "./user";
 export { getDocs, deleteDocs, changeDocs } from "./document";
