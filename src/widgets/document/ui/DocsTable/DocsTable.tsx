@@ -15,6 +15,8 @@ import { useAppDispatch, useAppSelector } from "@/shared/utils";
 import { getDocs } from "@/features";
 import { CustomModal, StyledTableCell, StyledTableRow } from "@/shared/ui";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { openModal } from "../../model/slice/docsModalSlice";
 
 const DocsTable: FC = () => {
   const { docs, isLoading, error } = useAppSelector((store) => store.docs);
@@ -41,7 +43,16 @@ const DocsTable: FC = () => {
       <Table sx={{ minWidth: 1200 }} aria-label="customized table" stickyHeader>
         <TableHead>
           <TableRow>
-            <StyledTableCell></StyledTableCell>
+            <StyledTableCell align="center">
+              <Button
+                variant="contained"
+                size="small"
+                color="success"
+                onClick={() => dispatch(openModal({ formType: "create" }))}
+              >
+                Создать
+              </Button>
+            </StyledTableCell>
             <StyledTableCell>Имя документа</StyledTableCell>
             <StyledTableCell align="right">Тип документа</StyledTableCell>
             <StyledTableCell align="right">Статус документа</StyledTableCell>
@@ -56,10 +67,22 @@ const DocsTable: FC = () => {
         <TableBody>
           {docs.map((document) => (
             <StyledTableRow key={document.id}>
-              <StyledTableCell>
-                <Button variant="contained" size="small">
-                  Изменить
-                </Button>
+              <StyledTableCell align="center">
+                <IconButton
+                  aria-label="delete"
+                  size="small"
+                  color="primary"
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        formType: "change",
+                        currentDocument: document,
+                      }),
+                    )
+                  }
+                >
+                  <EditIcon />
+                </IconButton>
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {document.documentName}
@@ -85,8 +108,20 @@ const DocsTable: FC = () => {
               <StyledTableCell align="right">
                 {document.employeeSigDate.slice(0, 10)}
               </StyledTableCell>
-              <StyledTableCell>
-                <IconButton aria-label="delete" color="error" size="small">
+              <StyledTableCell align="center">
+                <IconButton
+                  aria-label="delete"
+                  color="error"
+                  size="small"
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        formType: "delete",
+                        currentDocument: document,
+                      }),
+                    )
+                  }
+                >
                   <DeleteIcon />
                 </IconButton>
               </StyledTableCell>
