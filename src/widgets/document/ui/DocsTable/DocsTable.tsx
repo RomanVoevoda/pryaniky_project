@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "@/shared/utils";
 import { getDocs } from "@/features";
-import { StyledTableCell, StyledTableRow } from "@/shared/ui";
+import { CustomModal, StyledTableCell, StyledTableRow } from "@/shared/ui";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const DocsTable: FC = () => {
@@ -30,9 +30,9 @@ const DocsTable: FC = () => {
 
   if (isLoading) {
     return (
-      <Box sx={{ display: "flex" }}>
+      <CustomModal open>
         <CircularProgress />
-      </Box>
+      </CustomModal>
     );
   }
 
