@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import { DocsTable } from "@/widgets";
+import { FC } from "react";
 
 const HomePage: FC = () => {
-  return <main>HomePage</main>;
+  return <DocsTable />;
 };
 
 export default HomePage;
