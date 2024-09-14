@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DocsSliceTypes } from "./types";
 import { DocsData } from "@/shared/api";
-import { getDocs } from "@/features";
+import { getDocs, createDocs } from "@/features";
 
 const initialState: DocsSliceTypes = {
   docs: [],
@@ -14,16 +14,20 @@ export const docsSlice = createSlice({
   initialState,
   reducers: {
     deleteDocsFromStore(state, action: PayloadAction<string>) {
-      state.docs.filter((document) => document.id != action.payload);
+      state.docs = state.docs.filter(
+        (document) => document.id !== action.payload,
+      );
     },
     addDocsInStore(state, action: PayloadAction<DocsData[]>) {
       state.docs = action.payload;
     },
     changeDocsInStore(state, action: PayloadAction<DocsData>) {
-      state.docs.find((document, index) => {
-        if (document.id === action.payload.id)
-          state.docs[index] = action.payload;
-      });
+      state.docs = state.docs.map((document) =>
+        document.id === action.payload.id ? action.payload : document,
+      );
+    },
+    createDocsInStore(state, action: PayloadAction<DocsData>) {
+      state.docs.push(action.payload);
     },
   },
   extraReducers: (builder) => {

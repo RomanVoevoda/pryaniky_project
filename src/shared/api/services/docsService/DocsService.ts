@@ -9,12 +9,12 @@ export default class DocsService {
     );
   }
 
-  static async addDocs(
-    post: DocsData,
+  static async createDocs(
+    document: DocsData,
   ): Promise<AxiosResponse<DocsResponseTypes>> {
     return client.post<DocsResponseTypes>(
       `/ru/data/v3/testmethods/docs/userdocs/create`,
-      { post },
+      document,
     );
   }
 
@@ -27,12 +27,11 @@ export default class DocsService {
   }
 
   static async changeDocs(
-    id: string,
     document: DocsData,
   ): Promise<AxiosResponse<DocsResponseTypes>> {
     return client.post<DocsResponseTypes>(
-      `/ru/data/v3/testmethods/docs/userdocs/set/{id}`,
-      { id, document },
+      `/ru/data/v3/testmethods/docs/userdocs/set/${document.id}`,
+      document,
     );
   }
 }

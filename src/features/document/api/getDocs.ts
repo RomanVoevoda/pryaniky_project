@@ -2,8 +2,6 @@ import { DocsService } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getDocs = createAsyncThunk("getDocs", async (_, thunkApi) => {
-  const { dispatch } = thunkApi;
-
   try {
     const response = await DocsService.getDocs();
 
