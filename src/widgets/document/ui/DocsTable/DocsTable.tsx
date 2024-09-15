@@ -33,7 +33,7 @@ const DocsTable: FC = () => {
   if (isLoading) {
     return (
       <CustomModal open>
-        <CircularProgress />
+        <CircularProgress className={styles.table__loader}/>
       </CustomModal>
     );
   }

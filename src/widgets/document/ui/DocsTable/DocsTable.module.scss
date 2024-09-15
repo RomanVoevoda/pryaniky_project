@@ -13,4 +13,8 @@
     background-color: var(--scrollbar-color) !important;
     border: 3px solid var(--scrollbar-color) !important;
   }
+
+  &__loader {
+    outline: none;
+  }
 }

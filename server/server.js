@@ -17,9 +17,6 @@ app.use(express.json());
 app.use("/api", async (req, res) => {
   const url =
     "https://test.v5.pryaniky.com" + req.originalUrl.replace("/api", "");
-  console.log("Получен запрос:", req.method, req.originalUrl, req.body);
-  console.log("Тело запроса:", req.body);
-  console.log("Заголовки запроса:", req.headers);
 
   try {
     const response = await axios({

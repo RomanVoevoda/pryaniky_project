@@ -9,7 +9,7 @@ import styles from "@/shared/ui/form/Form.module.scss";
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { isLoading, error } = useAppSelector((state) => state.auth);
+  const { isLoading } = useAppSelector((state) => state.auth);
 
   const [loginInput, setLoginInput] = useState({
     login: "",

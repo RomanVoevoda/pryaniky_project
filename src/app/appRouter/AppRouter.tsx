@@ -1,4 +1,4 @@
-import { privateRoutesEnum, publicRoutesEnum } from "@/shared/model";
+import { publicRoutesEnum } from "@/shared/model";
 import { FC, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { privateRoutes } from "./consts/privateRoutes";

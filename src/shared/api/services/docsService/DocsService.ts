@@ -20,8 +20,8 @@ export default class DocsService {
 
   static async deleteDoc(
     id: string,
-  ): Promise<AxiosResponse<SingleDocResponse>> {
-    return client.post<SingleDocResponse>(
+  ): Promise<AxiosResponse>{
+    return client.post(
       `/ru/data/v3/testmethods/docs/userdocs/delete/${id}`,
     );
   }
