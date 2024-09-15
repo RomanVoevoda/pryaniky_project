@@ -19,6 +19,21 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  &::-webkit-scrollbar {
+    width: 17px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--scrollbar-color) !important;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color) !important;
+    border: 3px solid var(--scrollbar-color) !important;
+  }
+}
+
 body {
   box-sizing: border-box;
 }

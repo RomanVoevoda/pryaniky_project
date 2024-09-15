@@ -1,6 +1,10 @@
 .table {
   min-height: 100dvh !important;
 
+  & table {
+    position: relative !important;
+  }
+
   &::-webkit-scrollbar {
     width: 1px !important;
   }
@@ -8,7 +12,7 @@
   &::-webkit-scrollbar-track {
     background: var(--scrollbar-color) !important;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-color) !important;
     border: 3px solid var(--scrollbar-color) !important;
@@ -16,5 +20,18 @@
 
   &__loader {
     outline: none;
+  }
+
+  &__footer {
+    background-color: #000 !important;
+
+    & * {
+      color: #fff !important;
+    }
+
+    & select,
+    option {
+      background-color: #000 !important;
+    }
   }
 }
