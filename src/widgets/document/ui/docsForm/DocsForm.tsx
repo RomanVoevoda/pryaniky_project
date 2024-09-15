@@ -3,7 +3,7 @@ import { createDoc } from "@/features/document";
 import { DocsData } from "@/shared/api";
 import { useAppDispatch } from "@/shared/utils";
 import { Box, Button, TextField } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, forwardRef, useState } from "react";
 import { initialDocumentState } from "../../consts/initialDocumentState";
 
 interface DocsFormProps {
@@ -12,7 +12,7 @@ interface DocsFormProps {
   onClose: () => void;
 }
 
-const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
+const DocsForm = forwardRef<HTMLFormElement, DocsFormProps>(({ document, type, onClose }, ref) => {
   const dispatch = useAppDispatch();
   const [documentState, setDocumentState] = useState(
     document || initialDocumentState,
@@ -21,6 +21,8 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
   if (type === "delete") {
     return (
       <Box
+        ref={ref}
+        tabIndex={0}
         component="form"
         sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
         noValidate={true}
@@ -80,6 +82,8 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
       sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
       noValidate={true}
       autoComplete="off"
+      ref={ref}
+      tabIndex={0}
     >
       <h1>
         {type === "create" ? "Создание документа" : "Изменение документа"}
@@ -139,6 +143,6 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
       </Button>
     </Box>
   );
-};
+});
 
 export default DocsForm;
