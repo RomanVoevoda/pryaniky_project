@@ -1,35 +1,35 @@
 import { AxiosResponse } from "axios";
 import client from "../../client";
-import { DocsData, DocsResponseTypes } from "./types";
+import { ArrayOfDocsResponse, DocsData, SingleDocResponse } from "./types";
 
 export default class DocsService {
-  static async getDocs(): Promise<AxiosResponse<DocsResponseTypes>> {
-    return client.get<DocsResponseTypes>(
+  static async getDocs(): Promise<AxiosResponse<ArrayOfDocsResponse>> {
+    return client.get<ArrayOfDocsResponse>(
       `/ru/data/v3/testmethods/docs/userdocs/get`,
     );
   }
 
-  static async createDocs(
+  static async createDoc(
     document: DocsData,
-  ): Promise<AxiosResponse<DocsResponseTypes>> {
-    return client.post<DocsResponseTypes>(
+  ): Promise<AxiosResponse<SingleDocResponse>> {
+    return client.post<SingleDocResponse>(
       `/ru/data/v3/testmethods/docs/userdocs/create`,
       document,
     );
   }
 
-  static async deleteDocs(
+  static async deleteDoc(
     id: string,
-  ): Promise<AxiosResponse<DocsResponseTypes>> {
-    return client.post<DocsResponseTypes>(
+  ): Promise<AxiosResponse<SingleDocResponse>> {
+    return client.post<SingleDocResponse>(
       `/ru/data/v3/testmethods/docs/userdocs/delete/${id}`,
     );
   }
 
-  static async changeDocs(
+  static async changeDoc(
     document: DocsData,
-  ): Promise<AxiosResponse<DocsResponseTypes>> {
-    return client.post<DocsResponseTypes>(
+  ): Promise<AxiosResponse<SingleDocResponse>> {
+    return client.post<SingleDocResponse>(
       `/ru/data/v3/testmethods/docs/userdocs/set/${document.id}`,
       document,
     );

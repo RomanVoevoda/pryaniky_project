@@ -1,4 +1,4 @@
-export { changeDocs } from "./api/changeDocs";
-export { deleteDocs } from "./api/deleteDocs";
+export { changeDoc } from "./api/changeDoc";
+export { deleteDoc } from "./api/deleteDoc";
 export { getDocs } from "./api/getDocs";
-export { createDocs } from "./api/createDocs";
+export { createDoc } from "./api/createDoc";

@@ -3,7 +3,7 @@ import { AuthSliceTypes } from "./types";
 import { login } from "@/features";
 
 const initialState: AuthSliceTypes = {
-  isAuth: (localStorage.getItem('token')) ? true : false,
+  isAuth: localStorage.getItem("token") ? true : false,
   isLoading: false,
   error: "",
 };

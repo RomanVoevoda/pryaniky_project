@@ -1,6 +1,5 @@
 import { FC, useEffect } from "react";
 import {
-  Box,
   Button,
   CircularProgress,
   IconButton,

@@ -28,7 +28,7 @@ app.use("/api", async (req, res) => {
       data: req.body,
       headers: {
         "Content-Type": "application/json",
-        "x-auth": req.headers['x-auth'],
+        "x-auth": req.headers["x-auth"],
       },
     });
 

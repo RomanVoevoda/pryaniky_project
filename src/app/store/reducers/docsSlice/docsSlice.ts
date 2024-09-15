@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DocsSliceTypes } from "./types";
 import { DocsData } from "@/shared/api";
-import { getDocs, createDocs } from "@/features";
+import { getDocs, createDoc, deleteDoc, changeDoc } from "@/features";
 
 const initialState: DocsSliceTypes = {
   docs: [],
@@ -12,24 +12,7 @@ const initialState: DocsSliceTypes = {
 export const docsSlice = createSlice({
   name: "documents",
   initialState,
-  reducers: {
-    deleteDocsFromStore(state, action: PayloadAction<string>) {
-      state.docs = state.docs.filter(
-        (document) => document.id !== action.payload,
-      );
-    },
-    addDocsInStore(state, action: PayloadAction<DocsData[]>) {
-      state.docs = action.payload;
-    },
-    changeDocsInStore(state, action: PayloadAction<DocsData>) {
-      state.docs = state.docs.map((document) =>
-        document.id === action.payload.id ? action.payload : document,
-      );
-    },
-    createDocsInStore(state, action: PayloadAction<DocsData>) {
-      state.docs.push(action.payload);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -44,6 +27,56 @@ export const docsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getDocs.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+      
+      .addCase(
+        createDoc.fulfilled,
+        (state, action: PayloadAction<DocsData>) => {
+          state.isLoading = false;
+          state.error = "";
+          state.docs.push(action.payload);
+        },
+      )
+      .addCase(createDoc.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createDoc.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+
+      .addCase(
+        deleteDoc.fulfilled,
+        (state, action: PayloadAction<string>) => {
+          state.isLoading = false;
+          state.error = "";
+          state.docs = state.docs.filter(doc => doc.id !== action.payload);
+        },
+      )
+      .addCase(deleteDoc.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteDoc.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      })
+
+      .addCase(
+        changeDoc.fulfilled,
+        (state, action: PayloadAction<DocsData>) => {
+          state.isLoading = false;
+          state.error = "";
+          state.docs = state.docs.map((document) =>
+            document.id === action.payload.id ? action.payload : document
+      );
+        },
+      )
+      .addCase(changeDoc.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changeDoc.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
       });

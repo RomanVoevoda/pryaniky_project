@@ -1,5 +1,9 @@
-export interface DocsResponseTypes {
+export interface ArrayOfDocsResponse {
   data: DocsData[];
+}
+
+export interface SingleDocResponse {
+  data: DocsData;
 }
 
 export interface DocsData {

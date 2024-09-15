@@ -1,15 +1,13 @@
 import { DocsService } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const deleteDocs = createAsyncThunk(
-  "getDocs",
+export const deleteDoc = createAsyncThunk(
+  "deleteDoc",
   async (id: string, thunkApi) => {
-    const { dispatch } = thunkApi;
-
     try {
-      const response = await DocsService.deleteDocs(id);
+      await DocsService.deleteDoc(id);
 
-      dispatch({ type: "documents/deleteDocsFromStore", payload: id });
+      return id;
     } catch (e) {
       if (e instanceof Error) {
         return thunkApi.rejectWithValue(e.message);

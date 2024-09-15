@@ -1,5 +1,5 @@
-import { changeDocs, deleteDocs } from "@/features";
-import { createDocs } from "@/features/document";
+import { changeDoc, deleteDoc } from "@/features";
+import { createDoc } from "@/features/document";
 import { DocsData } from "@/shared/api";
 import { useAppDispatch } from "@/shared/utils";
 import { Box, Button, TextField } from "@mui/material";
@@ -31,7 +31,7 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
           variant="contained"
           color="error"
           onClick={() => {
-            dispatch(deleteDocs(documentState.id));
+            dispatch(deleteDoc(documentState.id));
             onClose();
           }}
         >
@@ -52,7 +52,6 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
   const handleFormSubmit = () => {
     const updatedDocumentState = {
       ...documentState,
-      id: documentState.id.length < 1 ? new Date().toISOString() : documentState.id,
       companySigDate:
         documentState.companySigDate.length < 1
           ? new Date().toISOString()
@@ -65,10 +64,10 @@ const DocsForm: FC<DocsFormProps> = ({ document, type, onClose }) => {
     
     switch (type) {
       case "create":
-        dispatch(createDocs(updatedDocumentState));
+        dispatch(createDoc(updatedDocumentState));
         break;
       case "change":
-        dispatch(changeDocs(updatedDocumentState));
+        dispatch(changeDoc(updatedDocumentState));
         break;
     }
 
