@@ -1,0 +1,16 @@
+.table {
+  min-height: 100dvh !important;
+
+  &::-webkit-scrollbar {
+    width: 1px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--scrollbar-color) !important;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color) !important;
+    border: 3px solid var(--scrollbar-color) !important;
+  }
+}

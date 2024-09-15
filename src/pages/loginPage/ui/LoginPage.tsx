@@ -4,9 +4,9 @@ import styles from "./LoginPage.module.scss";
 
 const LoginPage: FC = () => {
   return (
-    <main className={styles.page}>
+    <section className={styles.page}>
       <LoginForm />
-    </main>
+    </section>
   );
 };
 

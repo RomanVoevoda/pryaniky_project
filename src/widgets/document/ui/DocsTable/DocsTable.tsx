@@ -16,6 +16,7 @@ import { CustomModal, StyledTableCell, StyledTableRow } from "@/shared/ui";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { openModal } from "../../model/slice/docsModalSlice";
+import styles from "./DocsTable.module.scss";
 
 const DocsTable: FC = () => {
   const { docs, isLoading, error } = useAppSelector((store) => store.docs);
@@ -38,7 +39,7 @@ const DocsTable: FC = () => {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={styles.table}>
       <Table sx={{ minWidth: 1200 }} aria-label="customized table" stickyHeader>
         <TableHead>
           <TableRow>

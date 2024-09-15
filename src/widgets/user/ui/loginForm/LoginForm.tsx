@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/shared/utils";
 import { Box, Button, TextField } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./LoginForm.module.scss";
+import styles from "@/shared/ui/form/Form.module.scss";
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
