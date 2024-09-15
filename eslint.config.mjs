@@ -23,4 +23,14 @@ export default [
       "jest/valid-expect": "error",
     },
   },
+  {
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": ["@mui/*/*/*"]
+        }
+      ]
+    }
+  }
 ];
