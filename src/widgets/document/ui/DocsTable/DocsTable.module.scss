@@ -1,12 +1,19 @@
 .table {
   min-height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow: auto;
 
   & table {
     position: relative !important;
+    margin-bottom: 5rem;
   }
 
   &::-webkit-scrollbar {
-    width: 1px !important;
+    width: 17px !important;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: var(--scrollbar-color) !important;
   }
 
   &::-webkit-scrollbar-track {
@@ -23,7 +30,16 @@
   }
 
   &__footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 5rem;
     background-color: #000 !important;
+
+    @media screen and (width < 1200px) {
+      bottom: 17px;
+    }
 
     & * {
       color: #fff !important;

@@ -24,6 +24,10 @@ html {
     width: 17px !important;
   }
 
+  &::-webkit-scrollbar-corner {
+    background: var(--scrollbar-color) !important;
+  }
+  
   &::-webkit-scrollbar-track {
     background: var(--scrollbar-color) !important;
   }

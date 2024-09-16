@@ -4,6 +4,8 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { BuildOptions } from "./types/types";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export function buildPlugins({mode, paths, analyzer}: BuildOptions): Configuration['plugins'] {
   const isDev = mode === 'development';
@@ -12,6 +14,9 @@ export function buildPlugins({mode, paths, analyzer}: BuildOptions): Configurati
 
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({ template: paths.html, favicon: paths.favicon}),
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_BASE_URL': JSON.stringify(process.env.REACT_APP_BASE_URL),
+    }),
   ]
 
   if(isDev) {
